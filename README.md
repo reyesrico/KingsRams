@@ -34,10 +34,33 @@ scripts connect to a simulator on another machine.
 
 The first client connects all seven Booster T1 robots allowed by the `ssim26`
 rule book and places a balanced formation: one goalkeeper, two defenders, two midfielders, and two
-strikers. It holds the official example's nominal T1 standing pose after
-initialization. This is a protocol and environment smoke test, not yet a walking or ball-playing
-team. Locomotion should be the next layer, followed by localization, world state,
-role decisions, passing, and coordinated strategy.
+strikers. Standing is the default motion and uses the locomotion policy with a
+zero velocity target to actively balance the free-root humanoid. A fixed joint
+pose alone cannot keep a simulated humanoid upright. Walking uses the same
+official RCSSServerMJ T1 policy and accepts normalized forward, lateral, and turn
+velocities in the range `-1.0` to `1.0`.
+
+Start the full team standing:
+
+```sh
+./start.sh
+```
+
+Start the full team walking forward at half speed:
+
+```sh
+KINGRAMS_MOTION=walk KINGRAMS_FORWARD=0.5 ./start.sh
+```
+
+For isolated motion development, start one robot directly:
+
+```sh
+.venv/bin/kingsrams-agent --uniform-number 1 --motion walk --forward 0.5
+```
+
+The walking controller stabilizes for 50 simulation cycles before applying the
+requested velocity. Ball-playing behavior still requires localization, world
+state, role decisions, passing, and coordinated strategy.
 
 ## Layout
 
