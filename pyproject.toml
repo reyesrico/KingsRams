@@ -1,0 +1,16 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kingsrams"
+version = "0.1.0"
+description = "KingsRams RoboCup 3D Soccer Simulation team"
+requires-python = ">=3.10"
+dependencies = ["rcsssmj==0.2.1"]
+
+[project.scripts]
+kingsrams-agent = "kingsrams.agent:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kingsrams"]

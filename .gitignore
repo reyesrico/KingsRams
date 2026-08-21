@@ -1,0 +1,10 @@
+.DS_Store
+.venv/
+.run/
+*.egg-info/
+__pycache__/
+*.py[cod]
+build/
+dist/
+MUJOCO_LOG.TXT
+console.log
